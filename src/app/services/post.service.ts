@@ -24,9 +24,9 @@ export class PostService {
     .pipe(
       catchError((error:Response) => {
         if(error.status === 400){
-          return Observable.throw(new BadRequestError(error.json));
+          return throwError(new BadRequestError(error.json));
         }
-        return Observable.throw(new AppError(error));
+        return throwError(new AppError(error));
       })
     );
   }
@@ -40,9 +40,9 @@ export class PostService {
     .pipe(
       catchError((error: Response) => {
         if(error.status === 404){
-          return Observable.throw(new NotFoundError());
+          return throwError(new NotFoundError());
         }
-        return Observable.throw(new AppError(error));
+        return throwError(new AppError(error));
       })
     );
   }

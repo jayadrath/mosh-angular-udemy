@@ -21,9 +21,6 @@ export class PostsComponent implements OnInit{
         this.service.getPosts()
         .subscribe(response =>{
           this.posts = response as any[];
-        }, error => {
-          alert('An unexpected error occured ');
-          console.log(error);
         });
   }
 
@@ -42,8 +39,7 @@ export class PostsComponent implements OnInit{
             alert('BadRequestError ');
           }
           else{
-            alert('An unexpected error occured in createPost');
-            console.log(error.originalError);
+            throw error;
           }
         });
   }
@@ -53,11 +49,7 @@ export class PostsComponent implements OnInit{
       .subscribe(
         response => {
         console.log(response);
-      }, 
-      error => {
-        alert('An unexpected error occured in updatePost');
-        console.log(error);
-      })
+      });
   }
 
   deletePost(post){
@@ -73,8 +65,7 @@ export class PostsComponent implements OnInit{
         alert('This post has already been deleted');
       }
       else{
-        alert('An unexpected error occured in deletePost');
-        console.log(error.originalError);
+        throw error;
       }
     });
   }
